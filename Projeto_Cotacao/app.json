@@ -18,10 +18,14 @@
       "supportsTablet": true
     },
     "android": {
+      
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permissions.VIBRATE"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"

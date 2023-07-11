@@ -13,7 +13,8 @@ const styles = StyleSheet.create({
     numberImc:{
         fontSize: 48,
         color: "FF0043",
-        fontWeight: "bold"},
+        fontWeight: "bold",
+    },
 
     information:{
         fontSize:18,
