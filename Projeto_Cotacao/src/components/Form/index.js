@@ -33,50 +33,68 @@ export default function Form(){
             setMessageImc("Seu IMC é igual a:")
             setTextButton("Calcular Novamente")
             setErrorMessage(null)
-            return
+            
         }
-        verificationImc()
-        setImc(null)
-        setTextButton("Calcular")
-        setMessageImc("Preencha o peso e a altura")
-        
+        else{
+            verificationImc()
+            setImc(null)
+            setTextButton("Calcular")
+            setMessageImc("Preencha o peso e a altura")
+        }
     }
 
 
-    return(
-        <Pressable onPress={Keyboard.dismiss} style={styles.formContext}>
-           <View style={styles.form}> 
-
-             <Text style={styles.formLabel}>Altura</Text>
-             <Text style={styles.errorMessage}>{errorMessage}</Text>
-             <TextInput style={styles.input} 
+    return (
+        <View style={styles.formContext}>
+          {imc == null ? (
+            <Pressable onPress={Keyboard.dismiss} style={styles.form}>
+              <Text style={styles.formLabel}>Altura</Text>
+              <Text style={styles.errorMessage}>{errorMessage}</Text>
+              <TextInput
+                style={styles.input}
                 onChangeText={setHeight}
                 value={height}
                 placeholder="Ex: 1.75"
                 keyboardType="numeric"
-             />
-
-             <Text style={styles.formLabel}>Peso</Text>
-             <Text style={styles.errorMessage}>{errorMessage}</Text>
-             <TextInput style={styles.input}
+              />
+      
+              <Text style={styles.formLabel}>Peso</Text>
+              <Text style={styles.errorMessage}>{errorMessage}</Text>
+              <TextInput
+                style={styles.input}
                 onChangeText={setWeight}
                 value={weight}
                 placeholder="Ex: 65"
                 keyboardType="numeric"
-             />
-
-            <TouchableOpacity 
-            style={styles.buttonCalculator}
-            onPress={() => {
-                validationImc()
-            }}
-            >
+              />
+      
+              <TouchableOpacity
+                style={styles.buttonCalculator}
+                onPress={() => {
+                  validationImc();
+                }}
+              >
                 <Text style={styles.textButtonCalculator}>{textButton}</Text>
-            </TouchableOpacity>
-
-           </View>
-           <ResultImc messageResultImc={messageImc} resultImc={imc}/>
-        </Pressable>
-    )
+              </TouchableOpacity>
+      
+            </Pressable>
+            ) 
+            :
+            (
+            <View style={styles.exibitionResultImc}>
+              <ResultImc messageResultImc={messageImc} resultImc={imc} />
+              <TouchableOpacity
+                style={styles.buttonCalculator}
+                onPress={() => {
+                  validationImc();
+                }}
+              >
+                <Text style={styles.textButtonCalculator}>{textButton}</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        </View>
+      );
+      
 
 }
