@@ -1,8 +1,7 @@
 
-import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Modal, Image } from 'react-native';
 
 import { Camera } from 'expo-camera';
-import { CameraType } from 'expo-camera/build/Camera.types';
 import { useEffect, useState, useRef} from 'react';
 
 import { FontAwesome} from '@expo/vector-icons'
@@ -12,8 +11,9 @@ export default function App() {
   const camRef = useRef(null)         
   const [type, setType] = useState(Camera.Constants.Type.back)
   const [hasPermission, setHasPermission] = useState(null)
-  const [capturePhoto, setCapturePhoto] = useState(null)
-
+  const [capturedPhoto, setCapturedPhoto] = useState(null)
+  const [open, setOpen] = useState(false)
+ 
   useEffect (() => {
     (async () => {
       const {status} = await Camera.requestCameraPermissionsAsync()
@@ -30,10 +30,16 @@ export default function App() {
   }
 
 
-  async function takePicture(){
-    if (camRef) {
-      const data = await camRef.current.takePictureAsync();
-      setCapturePhoto(data.uri)
+  async function takePicture() {
+    try {
+      if (camRef.current) {
+        const data = await camRef.current.takePictureAsync();
+        setCapturedPhoto(data.uri);
+        setOpen(true);
+      }
+    } catch (error) {
+      console.log('Erro ao tirar foto:', error);
+      // Aqui você pode tratar o erro conforme necessário, como exibir uma mensagem de erro para o usuário.
     }
   }
 
@@ -47,6 +53,7 @@ export default function App() {
         <View style={styles.contentButtons}>
           <TouchableOpacity
           style={styles.buttonFlip}
+          ref={camRef}
           onPress={() => {
             setType(
               type === Camera.Constants.Type.back
@@ -66,6 +73,24 @@ export default function App() {
           </TouchableOpacity>
         </View>
       </Camera>
+      {capturedPhoto &&
+      (<Modal
+      animationType='slide'
+      transparent={true}
+      visible={open}
+      >
+        <View style={styles.contentModal}>
+        <TouchableOpacity 
+        style={styles.closeButton}
+        onPress={() => {setOpen(false)}}  >
+          <FontAwesome name='close' size={50} color="#fff"/>
+        </TouchableOpacity>
+
+
+        
+          <Image style={styles.imgPhoto} source={{uri : capturedPhoto}}/>
+        </View>
+      </Modal>)}
     </SafeAreaView>
   );
 }
@@ -73,17 +98,19 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    
     justifyContent: 'center',
-  },camera:{
+  },
+  camera:{
     width:"100%",
     height: "100%"
-  },contentButtons:{
+  },
+  contentButtons:{
     flex:1,
     backgroundColor: "transparent",
     flexDirection: "row"
     
-  }, buttonFlip:{
+  }, 
+  buttonFlip:{
     position: "absolute",
     bottom:50,
     left:30,
@@ -94,7 +121,8 @@ const styles = StyleSheet.create({
     height:50,
     width:50,
     borderRadius:50,
-  },  buttonCamera:{
+  },
+    buttonCamera:{
     position: "absolute",
     bottom:50,
     right:30,
@@ -106,5 +134,21 @@ const styles = StyleSheet.create({
     width:50,
     borderRadius:50,
 
+  }, 
+  contentModal:{
+    flex:1,
+    justifyContent:"center",
+    alignItems:"center",
+    margin:20,
+  }, 
+  closeButton:{
+    position:'absolute',
+    top:10,
+    left:2,
+    margin:10,
+  }, 
+  imgPhoto:{
+    width:"100%",
+    height:400,
   }
 });
