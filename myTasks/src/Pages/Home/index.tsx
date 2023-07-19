@@ -5,7 +5,7 @@ import React from 'react';
 export const  Home = () => {
   return (
     <View style={styles.container}>
-      <Text>Ola Mundo</Text>
+      <Text style={styles.title}>Ola Mundo</Text>
     </View>
   );
 }
@@ -13,7 +13,11 @@ export const  Home = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#121214",
     justifyContent:"center",
-    alignItems: 'center'
+    alignItems: "center"
   },
+  title:{
+    color: "#f1f1f1"
+  }
 });
