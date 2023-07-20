@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet,SafeAreaView,Platform, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet,SafeAreaView,Platform, Text, View, TextInput, TouchableOpacity, FlatList,  } from 'react-native';
 import React from 'react';
 
 export const  Home = () => {
@@ -36,11 +36,18 @@ export const  Home = () => {
 
         <Text style={styles.titleTasks}>Minhas Tarefas</Text>
    
-        {tasks.map(task => (
-          <TouchableOpacity key={task.id} style={styles.buttonTask}>
-            <Text style={styles.titleTask}>{task.title}</Text>
+        <FlatList
+        data={tasks}
+        keyExtractor={item => item.id}
+        renderItem={({item}) => (
+          <TouchableOpacity  style={styles.buttonTask}>
+            <Text style={styles.titleTask}>{item.title}</Text>
           </TouchableOpacity>
-        ))}
+        )}>
+          
+        </FlatList>
+        
+
 
      </View>
     </SafeAreaView>
