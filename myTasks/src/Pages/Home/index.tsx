@@ -4,7 +4,22 @@ import React from 'react';
 
 export const  Home = () => {
 
+  interface Task {
+    id: string;
+    title: string;
+  }
+
   const [newTask, setNewTask] = React.useState("")
+  const [tasks, setTasks] = React.useState<Task[]>([])
+
+  const handleAddNewTask = () => {
+    const data = {
+      id: String(new Date().getTime()),
+      title: newTask ? newTask : 'Task empty'
+    }
+
+    setTasks([... tasks, data])
+  }
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -15,13 +30,17 @@ export const  Home = () => {
          placeholderTextColor="#555"
          placeholder='Nova Tarefa'
          style={styles.input}/>
-        <TouchableOpacity activeOpacity={0.7} style={styles.button}>
+        <TouchableOpacity onPress={handleAddNewTask} activeOpacity={0.7} style={styles.button}>
             <Text style={styles.buttonText}>Adicionar</Text>
         </TouchableOpacity>
 
-        <Text style={styles.titleTask}>Minhas Tarefas</Text>
+        <Text style={styles.titleTasks}>Minhas Tarefas</Text>
    
-        <Text style={styles.title}>{newTask}</Text>
+        {tasks.map(task => (
+          <TouchableOpacity key={task.id} style={styles.buttonTask}>
+            <Text style={styles.titleTask}>{task.title}</Text>
+          </TouchableOpacity>
+        ))}
 
      </View>
     </SafeAreaView>
@@ -29,8 +48,7 @@ export const  Home = () => {
 }
 
 const styles = StyleSheet.create({
-  safeArea:{
-    
+  safeArea:{  
       flex: 1,
       backgroundColor: "#121214",
   },
@@ -66,10 +84,22 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold"
   },
-  titleTask:{
+  titleTasks:{
     color: "#f1f1f1",
     fontSize: 24,
     fontWeight: "bold",
     marginVertical:50,
+  },
+  buttonTask:{
+    backgroundColor:"#29292e",
+    padding:10,
+    marginTop:10,
+    borderRadius:50,
+    alignItems:'center'
+  },
+  titleTask:{
+    color: '#f1f1f1',
+    fontSize: 20,
+    fontWeight: 'bold'
   }
 });
