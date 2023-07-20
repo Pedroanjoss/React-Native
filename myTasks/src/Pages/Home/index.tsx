@@ -3,14 +3,26 @@ import { StyleSheet,SafeAreaView,Platform, Text, View, TextInput, TouchableOpaci
 import React from 'react';
 
 export const  Home = () => {
+
+  const [newTask, setNewTask] = React.useState("")
+
   return (
     <SafeAreaView style={styles.safeArea}>
      <View style={styles.container}>
         <Text style={styles.title}>Welcome, Dev!</Text>
-        <TextInput style={styles.input}/>
+        <TextInput 
+        onChangeText={setNewTask}
+         placeholderTextColor="#555"
+         placeholder='Nova Tarefa'
+         style={styles.input}/>
         <TouchableOpacity activeOpacity={0.7} style={styles.button}>
             <Text style={styles.buttonText}>Adicionar</Text>
         </TouchableOpacity>
+
+        <Text style={styles.titleTask}>Minhas Tarefas</Text>
+   
+        <Text style={styles.title}>{newTask}</Text>
+
      </View>
     </SafeAreaView>
   );
@@ -53,5 +65,11 @@ const styles = StyleSheet.create({
     color: '#121214',
     fontSize: 18,
     fontWeight: "bold"
+  },
+  titleTask:{
+    color: "#f1f1f1",
+    fontSize: 24,
+    fontWeight: "bold",
+    marginVertical:50,
   }
 });
