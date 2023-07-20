@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet,SafeAreaView,Platform, Text, View, TextInput } from 'react-native';
+import { StyleSheet,SafeAreaView,Platform, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import React from 'react';
 
 export const  Home = () => {
@@ -8,6 +8,9 @@ export const  Home = () => {
      <View style={styles.container}>
         <Text style={styles.title}>Welcome, Dev!</Text>
         <TextInput style={styles.input}/>
+        <TouchableOpacity activeOpacity={0.7} style={styles.button}>
+            <Text style={styles.buttonText}>Adicionar</Text>
+        </TouchableOpacity>
      </View>
     </SafeAreaView>
   );
@@ -38,5 +41,17 @@ const styles = StyleSheet.create({
     padding: Platform.OS === 'ios' ? 15 :12,
     marginTop: 30,
     borderRadius: 7
+  },
+  button:{
+    backgroundColor: "#eba417",
+    padding: 15,
+    borderRadius: 7,
+    alignItems: "center",
+    marginTop: 20
+  },
+  buttonText:{
+    color: '#121214',
+    fontSize: 18,
+    fontWeight: "bold"
   }
 });
