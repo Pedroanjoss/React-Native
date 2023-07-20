@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet,SafeAreaView,Platform, Text, View, TextInput, TouchableOpacity, FlatList,  } from 'react-native';
+import { StyleSheet,SafeAreaView,Platform, Text, View, TextInput, TouchableOpacity,   } from 'react-native';
 import React from 'react';
+import { TaskList } from '../../Components/TaskList';
 
 export const  Home = () => {
 
@@ -36,17 +37,7 @@ export const  Home = () => {
 
         <Text style={styles.titleTasks}>Minhas Tarefas</Text>
    
-        <FlatList
-        data={tasks}
-        keyExtractor={item => item.id}
-        renderItem={({item}) => (
-          <TouchableOpacity  style={styles.buttonTask}>
-            <Text style={styles.titleTask}>{item.title}</Text>
-          </TouchableOpacity>
-        )}>
-          
-        </FlatList>
-        
+        <TaskList tasks={tasks}/>
 
 
      </View>
@@ -97,16 +88,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginVertical:50,
   },
-  buttonTask:{
-    backgroundColor:"#29292e",
-    padding:10,
-    marginTop:10,
-    borderRadius:50,
-    alignItems:'center'
-  },
-  titleTask:{
-    color: '#f1f1f1',
-    fontSize: 20,
-    fontWeight: 'bold'
-  }
+
 });
