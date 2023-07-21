@@ -2,16 +2,15 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet,SafeAreaView,Platform, Text, View, TextInput, TouchableOpacity,   } from 'react-native';
 import React from 'react';
 import { TaskList } from '../../Components/TaskList';
+import { TasksContext } from '../../Context/TaskContext';
 
 export const  Home = () => {
 
-  interface Task {
-    id: string;
-    title: string;
-  }
+  
 
   const [newTask, setNewTask] = React.useState("")
-  const [tasks, setTasks] = React.useState<Task[]>([])
+  const tasks = React.useContext(TasksContext)
+  console.log(tasks)
 
   const handleAddNewTask = () => {
     const data = {
@@ -19,7 +18,7 @@ export const  Home = () => {
       title: newTask ? newTask : 'Task empty'
     }
 
-    setTasks([... tasks, data])
+   
   }
 
   return (
@@ -37,7 +36,7 @@ export const  Home = () => {
 
         <Text style={styles.titleTasks}>Minhas Tarefas</Text>
    
-        <TaskList tasks={tasks}/>
+        <TaskList />
 
 
      </View>
