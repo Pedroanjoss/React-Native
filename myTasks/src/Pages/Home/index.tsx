@@ -2,14 +2,14 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet,SafeAreaView,Platform, Text, View, TextInput, TouchableOpacity,   } from 'react-native';
 import React from 'react';
 import { TaskList } from '../../Components/TaskList';
-import { TasksContext } from '../../Context/TaskContext';
+import { useTaskList } from '../../Context/TaskContext';
 
 export const  Home = () => {
 
   
 
   const [newTask, setNewTask] = React.useState("")
-  const {addTask} = React.useContext(TasksContext)
+  const {addTask} = useTaskList()
   
 
   const handleAddNewTask = () => {
