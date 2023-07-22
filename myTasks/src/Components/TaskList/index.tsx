@@ -1,19 +1,34 @@
 import React from "react";
-import { FlatList, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { FlatList, Alert , TouchableOpacity, Text, StyleSheet } from "react-native";
 import { ITask, useTaskList } from "../../Context/TaskContext";
 
 
 
 export const TaskList = () => {
 
-  const {tasks} = useTaskList()
+  const {tasks, removeTask} = useTaskList()
+
+  const handleRemoveTask = (id: string)=>{
+      Alert.alert('Tem certeza?', 'Deseja realmente excluir a tarefa?',[
+        {
+          text: 'Cancelar',
+          onPress: () => {}
+        },
+        {
+          text: 'Excluir',
+          onPress: () => removeTask(id)
+        }
+      ])
+  }
+
+  
 
     return(
         <FlatList
         data={tasks as unknown as ITask[]}
         keyExtractor={item => item.id}
         renderItem={({item}) => (
-          <TouchableOpacity  style={styles.buttonTask}>
+          <TouchableOpacity  onPress={() => handleRemoveTask(item.id)} style={styles.buttonTask}>
             <Text style={styles.titleTask}>{item.title}</Text>
           </TouchableOpacity>
         )}>
