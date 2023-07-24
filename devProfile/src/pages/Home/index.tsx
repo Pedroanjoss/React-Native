@@ -1,8 +1,10 @@
 import React from 'react'
-import { View } from 'react-native'
+import { Container, Title } from './styles'
 
 export const Home: React.FunctionComponent = () => {
     return(
-        <View></View>
+        <Container>
+            <Title>Home Page</Title>
+        </Container>
     )
 }
