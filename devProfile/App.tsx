@@ -2,6 +2,7 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Home } from './src/pages/Home';
+import { SignIn } from './src/pages/SignIn';
 import theme from './src/global/styles/theme';
 import {useFonts, Roboto_400Regular, Roboto_700Bold} from "@expo-google-fonts/roboto"
 
@@ -17,7 +18,7 @@ import {useFonts, Roboto_400Regular, Roboto_700Bold} from "@expo-google-fonts/ro
   return (
     
     <ThemeProvider theme={theme}>
-       <Home></Home>
+       <SignIn></SignIn>
     </ThemeProvider>
   );
 }

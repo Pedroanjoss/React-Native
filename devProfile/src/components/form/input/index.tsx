@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "../../../pages/Home/styles";
+import { Container } from "./styles";
 import { TextInputProps } from "react-native";
 import theme from "../../../global/styles/theme";
 
