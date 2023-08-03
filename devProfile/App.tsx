@@ -7,6 +7,7 @@ import theme from './src/global/styles/theme';
 import {useFonts, Roboto_400Regular, Roboto_700Bold} from "@expo-google-fonts/roboto"
 import { SignUp } from './src/pages/SignUp';
 import { NavigationContainer } from '@react-navigation/native';
+import { Routes } from './src/routes';
 
  const App: React.FunctionComponent = () => {
   const [fontsLoaded] = useFonts({
@@ -20,7 +21,7 @@ import { NavigationContainer } from '@react-navigation/native';
   return (
     <NavigationContainer>
       <ThemeProvider theme={theme}>
-        <SignUp></SignUp>
+        <Routes/>
       </ThemeProvider>
     </NavigationContainer>
   );
