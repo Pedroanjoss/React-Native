@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Content, CreateAccount, ForgotPasswordButton, ForgotPasswordTitle, Icon, Logo, Title, CreateAccountTitle } from "./styles";
 import { Input } from "../../components/form/input";
-import { ScrollView, KeyboardAvoidingView, Platform } from "react-native";
+import { ScrollView, KeyboardAvoidingView, Platform, View } from "react-native";
 import { Button } from "../../components/form/Button";
 import logo from "../../assets/logo.png"
 
