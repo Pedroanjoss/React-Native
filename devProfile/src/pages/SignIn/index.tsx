@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Content, Logo, Title } from "./styles";
+import { Container, Content, ForgotPasswordButton, ForgotPasswordTitle, Logo, Title } from "./styles";
 import { Input } from "../../components/form/input";
 import { ScrollView } from "react-native";
 import { Button } from "../../components/form/Button";
@@ -20,6 +20,10 @@ export const SignIn: React.FunctionComponent = () => {
                     <Input placeholder="Senha"></Input>
 
                     <Button title="Entrar"/>
+
+                    <ForgotPasswordButton>
+                        <ForgotPasswordTitle>Esqueci minha senha </ForgotPasswordTitle>
+                    </ForgotPasswordButton>
                 </Content>
             </Container>
         </ScrollView>
