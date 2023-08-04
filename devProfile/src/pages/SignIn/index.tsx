@@ -4,9 +4,17 @@ import { Input } from "../../components/form/input";
 import { ScrollView, KeyboardAvoidingView, Platform, View } from "react-native";
 import { Button } from "../../components/form/Button";
 import logo from "../../assets/logo.png"
+import { useNavigation } from "@react-navigation/native";
 
+
+interface ScreenNavigationProp {
+    navigate: (screen: string) => void
+}
 
 export const SignIn: React.FunctionComponent = () => {
+
+    const {navigate} = useNavigation<ScreenNavigationProp>()
+
     return (
         <KeyboardAvoidingView enabled style={{ flex: 1}} behavior={ Platform.OS === 'ios' ? 'padding': undefined }>
             <ScrollView 
@@ -31,7 +39,9 @@ export const SignIn: React.FunctionComponent = () => {
                 </Container>
             </ScrollView>
 
-            <CreateAccount>
+            <CreateAccount onPress={() => {
+                navigate("SignUp")
+            }}>
                 <Icon name="log-in"/>
                 <CreateAccountTitle>Criar uma conta</CreateAccountTitle>
             </CreateAccount>
