@@ -1,16 +1,31 @@
 import React from "react";
 import { BackToSignIn, BackToSignInTitle, Container, Content, Icon, Logo, Title } from "./styles";
-import { Input } from "../../components/form/input";
+import { InputControl } from "../../components/form/inputControl";
 import { KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 import { Button } from "../../components/form/Button";
 import logo from "../../assets/logo.png"
 import { useNavigation } from "@react-navigation/native";
+import { useForm, FieldValues} from "react-hook-form";
 
 interface ScreenNavigationProp {
     goBack: () => void
 }
 
+
+interface IformInputs{
+    [name: string]: any
+}
+
 export const SignUp: React.FunctionComponent = () => {
+    const {handleSubmit, control} = useForm<FieldValues>()
+
+    const handleSignUp = (form: IformInputs) => {
+        const data = {
+            name: form.name,
+            email: form.email,
+            password: form.password,
+        };}
+
     const {goBack} = useNavigation<ScreenNavigationProp>()
 
     return (
@@ -23,11 +38,11 @@ export const SignUp: React.FunctionComponent = () => {
                 <Content>
                     <Logo source={logo}/>
                     <Title>Crie sua conta</Title>
-                    <Input placeholder="Nome completo"></Input>
-                    <Input placeholder="Email"></Input>
-                    <Input placeholder="Senha"></Input>
+                    <InputControl name="name" autoCapitalize="words" autoCorrect={false} control={control}  placeholder="Nome completo"></InputControl>
+                    <InputControl name="email" autoCapitalize="none" autoCorrect={false} keyboardType="email-address" control={control}  placeholder="Email"></InputControl>
+                    <InputControl name="password" autoCapitalize="none" autoCorrect={false} control={control} placeholder="Senha" secureTextEntry></InputControl>
 
-                    <Button title="Criar conta"/>
+                    <Button title="Entrar" onPress={() => handleSubmit(handleSignUp)}/>
                 </Content>
             </Container>
         </ScrollView>
