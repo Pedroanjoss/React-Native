@@ -38,11 +38,11 @@ export const SignUp: React.FunctionComponent = () => {
                 <Content>
                     <Logo source={logo}/>
                     <Title>Crie sua conta</Title>
-                    <InputControl name="name" autoCapitalize="words" autoCorrect={false} control={control}  placeholder="Nome completo"></InputControl>
+                    <InputControl name="name" autoCapitalize="words" autoCorrect={false} control={control}  placeholder="Nome"></InputControl>
                     <InputControl name="email" autoCapitalize="none" autoCorrect={false} keyboardType="email-address" control={control}  placeholder="Email"></InputControl>
                     <InputControl name="password" autoCapitalize="none" autoCorrect={false} control={control} placeholder="Senha" secureTextEntry></InputControl>
 
-                    <Button title="Entrar" onPress={() => handleSubmit(handleSignUp)}/>
+                    <Button title="Criar conta"/>
                 </Content>
             </Container>
         </ScrollView>
