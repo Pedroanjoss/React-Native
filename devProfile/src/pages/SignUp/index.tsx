@@ -1,11 +1,12 @@
 import React from "react";
 import { BackToSignIn, BackToSignInTitle, Container, Content, Icon, Logo, Title } from "./styles";
 import { InputControl } from "../../components/form/inputControl";
-import { KeyboardAvoidingView, Platform, ScrollView } from "react-native";
+import { Alert, KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 import { Button } from "../../components/form/Button";
 import logo from "../../assets/logo.png"
 import { useNavigation } from "@react-navigation/native";
 import { useForm, FieldValues} from "react-hook-form";
+import { api } from "../../services/api";
 
 interface ScreenNavigationProp {
     goBack: () => void
@@ -19,12 +20,21 @@ interface IformInputs{
 export const SignUp: React.FunctionComponent = () => {
     const {handleSubmit, control} = useForm<FieldValues>()
 
-    const handleSignUp = (form: IformInputs) => {
+    const handleSignUp = async (form: IformInputs) => {
         const data = {
             name: form.name,
             email: form.email,
             password: form.password,
-        };}
+        };
+    
+        try{
+            await api.post("users", data);
+            Alert.alert("Cadastro realizado", "Você já pode fazer login na aplicação")
+        }catch (error){
+            Alert.alert("Erro no cadastro", "Ocorreu um erro ao fazer o cadstro. Tente novamente")
+        }
+    
+    }
 
     const {goBack} = useNavigation<ScreenNavigationProp>()
 
