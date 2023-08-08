@@ -8,7 +8,7 @@ import {useFonts, Roboto_400Regular, Roboto_700Bold} from "@expo-google-fonts/ro
 import { SignUp } from './src/pages/SignUp';
 import { NavigationContainer } from '@react-navigation/native';
 import { Routes } from './src/routes';
-import { AuthContext } from './src/context/AuthContext';
+import { AuthProvider } from './src/context/AuthContext';
 
  const App: React.FunctionComponent = () => {
   const [fontsLoaded] = useFonts({
@@ -22,9 +22,9 @@ import { AuthContext } from './src/context/AuthContext';
   return (
     <NavigationContainer>
       <ThemeProvider theme={theme}>
-        <AuthContext.Provider value={{name: "Pedro"}}>
+        <AuthProvider>
           <Routes/>
-        </AuthContext.Provider>
+        </AuthProvider>
       </ThemeProvider>
     </NavigationContainer>
   );
