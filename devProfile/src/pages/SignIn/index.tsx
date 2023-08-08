@@ -7,6 +7,7 @@ import { Button } from "../../components/form/Button";
 import logo from "../../assets/logo.png"
 import { useNavigation } from "@react-navigation/native";
 import { InputControl } from "../../components/form/inputControl";
+import { AuthContext } from "../../context/AuthContext";
 
 
 interface ScreenNavigationProp {
@@ -18,6 +19,9 @@ interface IformInputs{
 }
 
 export const SignIn: React.FunctionComponent = () => {
+
+    const auth = React.useContext(AuthContext)
+
     const {handleSubmit, control} = useForm<FieldValues>()
 
 
